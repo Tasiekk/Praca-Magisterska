@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Created on Mon Feb 19 12:54:25 2018
 
@@ -33,13 +33,15 @@ PowiatyWOSLiczbaZd = pd.read_excel('GDA - POWIATY\POWIATY - WOS - Liczba zdajacy
 PowiatyWOSSredni = pd.read_excel('GDA - POWIATY\POWIATY - WOS - Średni wynik.xlsx',index_col=0,header=0)
 PowiatyWOSOdchSt = pd.read_excel('GDA - POWIATY\POWIATY - WOS - Odch st.xlsx',index_col=0,header=0)
 
-Srednie=[PowiatyAngSredni,PowiatyJPSredni,PowiatyWOSSredni]
-#PowiatyPolski = pd.read_excel('GDA - POWIATY\POWIATY - Human.xlsx',index_col=0,header=0,usecols=[0,1,2,3],names=namesP)
-#PowiatyWOS = pd.read_excel('GDA - POWIATY\POWIATY - Human.xlsx',index_col=0,header=0,usecols=[0,4,5,6],names=namesP)
-#PowiatyMat = pd.read_excel('GDA - POWIATY\POWIATY - Matma.xlsx',index_col=0,header=0,usecols=[0,1,2,3],names=namesP)
-#PowiatyPrz = pd.read_excel('GDA - POWIATY\POWIATY - Matma.xlsx',index_col=0,header=0,usecols=[0,4,5,6],names=namesP)
-#PowiatyNiemPodst = pd.read_excel('GDA - POWIATY\POWIATY - Niemiecki.xlsx',index_col=0,header=0,usecols=[0,1,2,3],names=namesP)
-#PowiatyNiemRozsz = pd.read_excel('GDA - POWIATY\POWIATY - Niemiecki.xlsx',index_col=0,header=0,usecols=[0,4,5,6],names=namesP)
+PowiatyMATLiczbaZd = pd.read_excel('GDA - POWIATY\POWIATY - MAT - Liczba zdających.xlsx',index_col=0,header=0)
+PowiatyMATSredni = pd.read_excel('GDA - POWIATY\POWIATY - MAT - Średni wynik.xlsx',index_col=0,header=0)
+PowiatyMATOdchSt = pd.read_excel('GDA - POWIATY\POWIATY - MAT - Odch st.xlsx',index_col=0,header=0)
+
+PowiatyPRZLiczbaZd = pd.read_excel('GDA - POWIATY\POWIATY - PRZ - Liczba zdajacych.xlsx',index_col=0,header=0)
+PowiatyPRZSredni = pd.read_excel('GDA - POWIATY\POWIATY - PRZ - Średni wynik.xlsx',index_col=0,header=0)
+PowiatyPRZOdchSt = pd.read_excel('GDA - POWIATY\POWIATY - PRZ - Odch st.xlsx',index_col=0,header=0)
+
+Srednie=[PowiatyAngSredni,PowiatyJPSredni,PowiatyWOSSredni,PowiatyMATSredni,PowiatyPRZSredni]
 
 ParametryKrajAng = pd.read_excel('Parametry WOJ-KRAJ\Parametry-KRAJ-Ang.xlsx',index_col=0,header=0)
 ParametryWojAng = pd.read_excel('Parametry WOJ-KRAJ\Parametry-WOJ-Ang.xlsx',index_col=0,header=0)
@@ -58,16 +60,27 @@ e=np.zeros(4)
 PowiatyAngSredni['2018-liniowo']=np.zeros(20)
 PowiatyJPSredni['2018-liniowo']=np.zeros(20)
 PowiatyWOSSredni['2018-liniowo']=np.zeros(20)
+PowiatyMATSredni['2018-liniowo']=np.zeros(20)
+PowiatyPRZSredni['2018-liniowo']=np.zeros(20)
+
 PowiatyAngSredni['2018-kwadratowo']=np.zeros(20)
 PowiatyJPSredni['2018-kwadratowo']=np.zeros(20)
 PowiatyWOSSredni['2018-kwadratowo']=np.zeros(20)
+PowiatyMATSredni['2018-kwadratowo']=np.zeros(20)
+PowiatyPRZSredni['2018-kwadratowo']=np.zeros(20)
 
 PowiatyAngSredni['Błąd-liniowo']=np.zeros(20)
 PowiatyJPSredni['Błąd-liniowo']=np.zeros(20)
 PowiatyWOSSredni['Błąd-liniowo']=np.zeros(20)
+PowiatyMATSredni['Błąd-liniowo']=np.zeros(20)
+PowiatyPRZSredni['Błąd-liniowo']=np.zeros(20)
+
 PowiatyAngSredni['Błąd-kwadratowo']=np.zeros(20)
 PowiatyJPSredni['Błąd-kwadratowo']=np.zeros(20)
 PowiatyWOSSredni['Błąd-kwadratowo']=np.zeros(20)
+PowiatyMATSredni['Błąd-kwadratowo']=np.zeros(20)
+PowiatyPRZSredni['Błąd-kwadratowo']=np.zeros(20)
+
 a=[2014,2015,2016,2017]
 for k in Srednie:
     for i in range(0,20):        
