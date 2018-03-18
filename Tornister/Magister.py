@@ -12,6 +12,7 @@ from Interpolacja import interpolation, error
 names=['Typ','Liczba zdających','Średni wynik','Odchylenie standardowe']
 namesP=['Liczba zdających','Średni wynik','Odchylenie standardowe']
 indexPowiaty=['bytowski','chojnicki','człuchowski','gdański','kartuski','kościerski','kwidzyński','lęborski','Gdańsk','Gdynia','Słupsk','Sopot','malborski','nowodworski','pucki','słupski','starogardzki','sztumski','tczewski','wejherowski']
+
 #GminyAngPodst = pd.read_excel('GDA - GMINY\GMINY - Angielski.xlsx',index_col=0, header=0,usecols=[0,1,2,3,4],names=names)
 #GminyAngRozsz = pd.read_excel('GDA - GMINY\GMINY - Angielski.xlsx',index_col=0, header=0,usecols=[0,1,5,6,7],names=names)
 #GminyPolski = pd.read_excel('GDA - GMINY\GMINY - Human.xlsx',index_col=0, header=0,usecols=[0,1,2,3,4],names=names)
@@ -105,32 +106,52 @@ for k in Srednie:
 #plt.show()
 #print(p(2018))
 
-#oceny=np.zeros(10)
-#punkty=np.zeros(4)
-#oceny[0]=input("Proszę podać ocenę z języka polskiego: ")
-#oceny[1]=input("Proszę podać ocenę z matematyki: ")
-#oceny[2]=input("Proszę podać ocenę z pierwszego przedmiotu dodatkowego ustalonego przez liceum: ")
-#oceny[3]=input("Proszę podać ocenę z drugiego przedmiotu dodatkowego ustalonego przez liceum: ")
+oceny=np.zeros(9)
+punkty=np.zeros(9)
+procenty=np.zeros(5)
+oceny[0]=input("Proszę podać ocenę z języka polskiego: ")
+oceny[1]=input("Proszę podać ocenę z matematyki: ")
+oceny[2]=input("Proszę podać ocenę z wiedzy o społeczeństwie: ")
+oceny[3]=input("Proszę podać ocenę z języka angielskiego: ")
+oceny[4]=input("Proszę podać ocenę z języka niemieckiego: ")
+oceny[5]=input("Proszę podać ocenę z fizyki: ")
+oceny[6]=input("Proszę podać ocenę z chemii: ")
+oceny[7]=input("Proszę podać ocenę z biologii: ")
+oceny[8]=input("Proszę podać ocenę z geografii: ")
 
-#for i in range(0,4):
-#    if oceny[i] in range(1,7):
-#        if oceny[i]==1:
-#            print("Dziecko nie ukończyło gimnazjum.")
-#        if oceny[i]==2:
-#            punkty[i]=2
-#        if oceny[i]==3:
-#            punkty[i]=8
-#        if oceny[i]==4:
-#            punkty[i]=14
-#        if oceny[i]==5:
-#            punkty[i]=17
-#        if oceny[i]==6:
-#            punkty[i]=18
-#    else:
-#        print("Podano złą ocenę!")
-        
-#SumaPKT=np.sum(punkty)
-#print("Dziecko otrzyma",SumaPKT,"punktów na podstawie ocen.")
+for i in range(0,9):
+    if oceny[i] in range(1,7):
+        if oceny[i]==1:
+            print("Dziecko nie ukończyło gimnazjum.")
+        if oceny[i]==2:
+            punkty[i]=2
+        if oceny[i]==3:
+            punkty[i]=8
+        if oceny[i]==4:
+            punkty[i]=14
+        if oceny[i]==5:
+            punkty[i]=17
+        if oceny[i]==6:
+            punkty[i]=18
+    else:
+        print("Podano złą ocenę!")
+
+print('Proszę wybrać sposób przewidywań wyników końcowych.')
+print('1 - przewidywanie na podstawie wyników egzaminów próbnych,')
+print('2 - przewidywanie na podstawie ocen,')
+print('3 - przewidywanie na podstawie wyników egzaminów głównych.')
+
+wybor=input('Twój wybór: ')
+if wybor==1 or wybor==3:
+    procenty[0]=input('Proszę podać wynik procentowy egzaminu z języka polskiego: ')
+    procenty[1]=input('Proszę podać wynik procentowy egzaminu z matematyki: ')
+    procenty[2]=input('Proszę podać wynik procentowy egzaminu z wiedzy o społeczeństwie: ')
+    procenty[3]=input('Proszę podać wynik procentowy egzaminu z przedmiotów przyrodniczych: ')
+    procenty[4]=input('Proszę podać wynik procentowy egzaminu z języka obcego: ')    
+if wybor==2:   
+
+else:
+    print('Nie ma takiej opcji!')
 
 #print("Przejdźmy do analizy przybliżonych wyników egzaminu gimnazjalnego.")
 #oceny[4]=input("Proszę podać ocenę z języka obcego nowożytnego, który będzie zdawany: ")
