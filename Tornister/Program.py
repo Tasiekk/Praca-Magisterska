@@ -58,14 +58,19 @@ else:
     for i in range(0,11):
         if mgr.oceny[i]==2:
             mgr.punkty[i]=2
+            mgr.punkty_proc[i]=2
         if mgr.oceny[i]==3:
             mgr.punkty[i]=8
+            mgr.punkty_proc[i]=8
         if mgr.oceny[i]==4:
             mgr.punkty[i]=14
+            mgr.punkty_proc[i]=13
         if mgr.oceny[i]==5:
             mgr.punkty[i]=17
+            mgr.punkty_proc[i]=18
         if mgr.oceny[i]==6:
             mgr.punkty[i]=18
+            mgr.punkty_proc[i]=20
     print('Proszę wybrać sposób przewidywań wyników końcowych.')
     print('1 - przewidywanie na podstawie wyników egzaminów próbnych,')
     print('2 - przewidywanie na podstawie ocen,')
@@ -75,11 +80,51 @@ else:
         wybor=int(input('Wybierz 1,2 lub 3! \nTwój wybór: '))
     dodatek=0
     if wybor==1 or wybor==3:
-        mgr.procenty[0]=input('Proszę podać wynik procentowy egzaminu z języka polskiego: ')
-        mgr.procenty[1]=input('Proszę podać wynik procentowy egzaminu z matematyki: ')
-        mgr.procenty[2]=input('Proszę podać wynik procentowy egzaminu z wiedzy o społeczeństwie: ')
-        mgr.procenty[3]=input('Proszę podać wynik procentowy egzaminu z przedmiotów przyrodniczych: ')
-        mgr.procenty[4]=input('Proszę podać wynik procentowy egzaminu z języka obcego: ')
+        print('Który z języków obcych będzie zdawał uczeń?')
+        print('1 - angielski')
+        print('2 - niemiecki')
+        jezyk=int(input('Proszę podać liczbę 1 lub 2: '))
+        while jezyk not in [1,2]:
+            jezyk=int(input('Proszę podać liczbę 1 lub 2: '))
+        print('W kolejnych krokach prosimy o podanie wyników procentowych z testów. Jeżeli uczeń był zwolniony z egzaminu proszę wpisać: zwolniony.')
+        pytania=['Proszę podać wynik procentowy egzaminu z języka polskiego: ',
+                'Proszę podać wynik procentowy egzaminu z matematyki: ',
+                'Proszę podać wynik procentowy egzaminu z wiedzy o społeczeństwie: ',
+                'Proszę podać wynik procentowy egzaminu z przedmiotów przyrodniczych: ',
+                'Proszę podać wynik procentowy egzaminu z języka obcego: ']
+        for i in range(0,5):
+               odp=input(pytania[i])
+               if odp=='zwolniony': 
+                   if i in [0,1]:
+                      mgr.procenty[i]=mgr.punkty_proc[i]*5
+                   if i==2:
+                      mgr.procenty[i]=(mgr.punkty_proc[2]+mgr.punkty_proc[9])*5/2
+                   if i==3:
+                      mgr.procenty[i]=(mgr.punkty_proc[5]+mgr.punkty_proc[6]+mgr.punkty_proc[7]+mgr.punkty_proc[8])*5/4
+                   if jezyk==1 and i==4:
+                      mgr.procenty[i]=mgr.punkty_proc[3]*5
+                   if jezyk==2 and i==4:
+                      mgr.procenty[i]=mgr.punkty_proc[4]*5
+               else:
+                   odp=int(odp)    
+                   while odp not in list(range(0,101)):
+                       odp=int(input(pytania[i]))
+                   mgr.procenty[i]=odp
+#        mgr.procenty[0]=input('Proszę podać wynik procentowy egzaminu z języka polskiego: ')
+#        while mgr.procenty[0] not in range (0,101):
+#            mgr.procenty[0]=input('Proszę podać poprawny wynik procentowy egzaminu z języka polskiego: ')
+#        mgr.procenty[1]=input('Proszę podać wynik procentowy egzaminu z matematyki: ')
+#        while mgr.procenty[1] not in range (0,101):
+#            mgr.procenty[1]=input('Proszę podać poprawny wynik procentowy egzaminu z matematyki: ')
+#        mgr.procenty[2]=input('Proszę podać wynik procentowy egzaminu z wiedzy o społeczeństwie: ')
+#        while mgr.procenty[2] not in range (0,101):
+#            mgr.procenty[2]=input('Proszę podać poprawny wynik procentowy egzaminu z wiedzy o społeczeństwie: ')
+#        mgr.procenty[3]=input('Proszę podać wynik procentowy egzaminu z przedmiotów przyrodniczych: ')
+#        while mgr.procenty[3] not in range (0,101):
+#            mgr.procenty[3]=input('Proszę podać poprawny wynik procentowy egzaminu z przedmiotów przyrodniczych: ')
+#        mgr.procenty[4]=input('Proszę podać wynik procentowy egzaminu z języka obcego: ')
+#        while mgr.procenty[4] not in range (0,101):
+#            mgr.procenty[4]=input('Proszę podać poprawny wynik procentowy egzaminu z języka obcego: ')
         WspProcentowy=np.sum(mgr.procenty)*(0.2)
         sumy=[WspProcentowy+mgr.punkty[0]+mgr.punkty[1]+mgr.punkty[3]+mgr.punkty[4],
               WspProcentowy+mgr.punkty[0]+mgr.punkty[1]+mgr.punkty[2]+mgr.punkty[9],WspProcentowy+mgr.punkty[0]+mgr.punkty[1]+mgr.punkty[7]+mgr.punkty[6],
@@ -199,10 +244,10 @@ else:
             dodatek+=10
         else:
             odp4=input('Czy został finalistą jednego konkursu przedmiotowego? ')
-        while odp4 not in ['tak','Tak','nie','Nie','t','T','n','N']:
-            odp4=input('Czy został finalistą jednego konkursu przedmiotowego? ')
-        if odp4 in ['tak','Tak','t','T']:
-            dodatek+=7
+            while odp4 not in ['tak','Tak','nie','Nie','t','T','n','N']:
+                odp4=input('Czy został finalistą jednego konkursu przedmiotowego? ')
+            if odp4 in ['tak','Tak','t','T']:
+                dodatek+=7
         odp2=input('Czy został laureatem dwóch lub więcej konkursów interdyscyplinarnych lub tematycznych? ')
         while odp2 not in ['tak','Tak','nie','Nie','t','T','n','N']:
             odp2=input('Czy został laureatem dwóch lub więcej konkursów interdyscyplinarnych lub tematycznych? ')
