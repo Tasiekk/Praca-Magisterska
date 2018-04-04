@@ -96,6 +96,7 @@ for k in Srednie:
 
 oceny=np.zeros(11)
 punkty=np.zeros(11)
+punkty_proc=np.zeros(11)
 procenty=np.zeros(5)
 procentyMIN=np.zeros(11)
 procentyMAX=np.zeros(11)
