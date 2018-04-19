@@ -18,10 +18,8 @@ def interpolation(x,y,degree):
 def error(x,y,degree):
     z = np.polyfit(x, y, degree)
     p = np.poly1d(z)
-    error = np.zeros(4)
-    for i in range(0,4):
+    error = np.zeros(len(x))
+    for i in range(0,len(x)):
         error[i]=(p(x[i])-y[i])*(p(x[i])-y[i])
     error = np.sqrt(np.sum(error))
     return error
-
-

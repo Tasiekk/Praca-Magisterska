@@ -6,6 +6,9 @@ Created on Fri Mar 30 11:37:22 2018
 """
 import Magister as mgr
 import numpy as np
+import pandas as pd
+
+
 mgr.oceny[0]=input("Proszę podać ocenę z języka polskiego: ")
 while mgr.oceny[0] not in range (1,7):
     mgr.oceny[0]=input("Podano złą ocenę! \nProszę podać ocenę z języka polskiego: ")
@@ -52,7 +55,6 @@ while mgr.oceny[10] not in range (1,7):
     
 if 1 in mgr.oceny:
     print('Dziecko nie ukończyło gimnazjum!')
-#    break
    
 else:
     for i in range(0,11):
@@ -110,21 +112,7 @@ else:
                    while odp not in list(range(0,101)):
                        odp=int(input(pytania[i]))
                    mgr.procenty[i]=odp
-#        mgr.procenty[0]=input('Proszę podać wynik procentowy egzaminu z języka polskiego: ')
-#        while mgr.procenty[0] not in range (0,101):
-#            mgr.procenty[0]=input('Proszę podać poprawny wynik procentowy egzaminu z języka polskiego: ')
-#        mgr.procenty[1]=input('Proszę podać wynik procentowy egzaminu z matematyki: ')
-#        while mgr.procenty[1] not in range (0,101):
-#            mgr.procenty[1]=input('Proszę podać poprawny wynik procentowy egzaminu z matematyki: ')
-#        mgr.procenty[2]=input('Proszę podać wynik procentowy egzaminu z wiedzy o społeczeństwie: ')
-#        while mgr.procenty[2] not in range (0,101):
-#            mgr.procenty[2]=input('Proszę podać poprawny wynik procentowy egzaminu z wiedzy o społeczeństwie: ')
-#        mgr.procenty[3]=input('Proszę podać wynik procentowy egzaminu z przedmiotów przyrodniczych: ')
-#        while mgr.procenty[3] not in range (0,101):
-#            mgr.procenty[3]=input('Proszę podać poprawny wynik procentowy egzaminu z przedmiotów przyrodniczych: ')
-#        mgr.procenty[4]=input('Proszę podać wynik procentowy egzaminu z języka obcego: ')
-#        while mgr.procenty[4] not in range (0,101):
-#            mgr.procenty[4]=input('Proszę podać poprawny wynik procentowy egzaminu z języka obcego: ')
+                   
         WspProcentowy=np.sum(mgr.procenty)*(0.2)
         sumy=[WspProcentowy+mgr.punkty[0]+mgr.punkty[1]+mgr.punkty[3]+mgr.punkty[4],
               WspProcentowy+mgr.punkty[0]+mgr.punkty[1]+mgr.punkty[2]+mgr.punkty[9],WspProcentowy+mgr.punkty[0]+mgr.punkty[1]+mgr.punkty[7]+mgr.punkty[6],
@@ -317,6 +305,19 @@ if wybor==1 or wybor==3:
         print('Jeżeli szkoła będzie wymagała ocen z fizyki i języka angielskiego to uczeń będzie miał',sumy[6],'punktów.')
         print('Jeżeli szkoła będzie wymagała ocen z chemii i języka angielskiego i to uczeń będzie miał',sumy[7],'punktów.')
         print('Jeżeli szkoła będzie wymagała ocen z informatyki i języka angielskiego to uczeń będzie miał',sumy[8],'punktów.')
+        
+        
+        df2=mgr.SzkolySredniLimit2[mgr.SzkolySredniLimit2['2018-liniowo']<min(sumy)]        
+        df2=pd.DataFrame(data=df2['2018-liniowo'].tolist(),index=df2.index.values.tolist(),columns=['2018'])      
+        df3=mgr.SzkolySredniLimit3[mgr.SzkolySredniLimit3['2018-liniowo']<min(sumy)]
+        df3=pd.DataFrame(data=df3['2018-liniowo'].tolist(),index=df3.index.values.tolist(),columns=['2018'])
+        df4=pd.concat([df2,df3])
+        df4['2018'] = df4['2018'].map('{:.2f} pkt'.format)
+        print()
+        print('Poniżej pokazujemy tabelę szkół, do których powinien dostać się uczeń w roku 2018 wraz z szacowanym progiem punktowym dla danej szkoły.')
+        print('Szkoły: ')
+        print(df4)
+        
 else:
     for i in range(0,9):
             sumyMIN[i]+=dodatek
@@ -337,4 +338,13 @@ else:
     print('Jeżeli szkoła będzie wymagała ocen z fizyki i języka angielskiego to uczeń zdobędzie od ',sumyMIN[6],'do',sumyMAX[6],'punktów.')
     print('Jeżeli szkoła będzie wymagała ocen z chemii i języka angielskiego i to uczeń zdobędzie od ',sumyMIN[7],'do',sumyMAX[7],'punktów.')
     print('Jeżeli szkoła będzie wymagała ocen z informatyki i języka angielskiego to uczeń zdobędzie od ',sumyMIN[8],'do',sumyMAX[8],'punktów.')
-#    break
+    df2=mgr.SzkolySredniLimit2[mgr.SzkolySredniLimit2['2018-liniowo']<min(sumyMIN)]
+    df2=pd.DataFrame(data=df2['2018-liniowo'].tolist(),index=df2.index.values.tolist(),columns=['2018'])   
+    df3=mgr.SzkolySredniLimit3[mgr.SzkolySredniLimit3['2018-liniowo']<min(sumyMIN)]
+    df3=pd.DataFrame(data=df3['2018-liniowo'].tolist(),index=df3.index.values.tolist(),columns=['2018']) 
+    df4=pd.concat([df2,df3])
+    df4['2018'] = df4['2018'].map('{:.2f} pkt'.format)
+    print('Poniżej pokazujemy tabelę szkół, do których powinien dostać się uczeń w roku 2018 wraz z szacowanym progiem punktowym dla danej szkoły.')
+    print()
+    print('Szkoły: ')
+    print(df4)
