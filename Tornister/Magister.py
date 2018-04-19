@@ -57,7 +57,41 @@ ParametryWojPrz = pd.read_excel('Parametry WOJ-KRAJ\Parametry-WOJ-Przyrka.xlsx',
 ParametryKrajWOS = pd.read_excel('Parametry WOJ-KRAJ\Parametry-KRAJ-WOS.xlsx',index_col=0,header=0)
 ParametryWojWOS = pd.read_excel('Parametry WOJ-KRAJ\Parametry-WOJ-WOS.xlsx',index_col=0,header=0)
 
-e=np.zeros(4)
+SzkolySredniLimit3 = pd.read_excel('SZKOŁY\LICEA - Średni limit punktowy.xlsx',index_col=0,header=0,skip_footer=5)
+SzkolySredniLimit2 = pd.read_excel('SZKOŁY\LICEA - Średni limit punktowy.xlsx',index_col=0,header=0, skiprows=27, usecols=2)
+
+SzkolySredniLimit3.insert(len(SzkolySredniLimit3.columns),'2018-liniowo',np.zeros(len(SzkolySredniLimit3)))
+SzkolySredniLimit3.insert(len(SzkolySredniLimit3.columns),'2018-kwadratowo',np.zeros(len(SzkolySredniLimit3)))
+SzkolySredniLimit3.insert(len(SzkolySredniLimit3.columns),'Błąd-liniowo',np.zeros(len(SzkolySredniLimit3)))
+SzkolySredniLimit3.insert(len(SzkolySredniLimit3.columns),'Błąd-kwadratowo',np.zeros(len(SzkolySredniLimit3)))
+
+SzkolySredniLimit2.insert(len(SzkolySredniLimit2.columns),'2018-liniowo',np.zeros(len(SzkolySredniLimit2)))
+SzkolySredniLimit2.insert(len(SzkolySredniLimit2.columns),'2018-kwadratowo',np.zeros(len(SzkolySredniLimit2)))
+SzkolySredniLimit2.insert(len(SzkolySredniLimit2.columns),'Błąd-liniowo',np.zeros(len(SzkolySredniLimit2)))
+SzkolySredniLimit2.insert(len(SzkolySredniLimit2.columns),'Błąd-kwadratowo',np.zeros(len(SzkolySredniLimit2)))
+   
+f=np.zeros(3)
+
+
+for i in range(0,len(SzkolySredniLimit3)):        
+       b=SzkolySredniLimit3[i:i+1]
+       for j in range(0,3):
+                f[j]=b.iat[0,j] 
+       SzkolySredniLimit3.iat[i,3]=interpolation([2015,2016,2017],f,1)
+       SzkolySredniLimit3.iat[i,4]=interpolation([2015,2016,2017],f,2)
+       SzkolySredniLimit3.iat[i,5]=error([2015,2016,2017],f,1)
+       SzkolySredniLimit3.iat[i,6]=error([2015,2016,2017],f,2)
+
+g=np.zeros(2)
+for i in range(0,len(SzkolySredniLimit2)):        
+       b=SzkolySredniLimit3[i:i+1]
+       for j in range(0,2):
+                g[j]=b.iat[0,j] 
+       SzkolySredniLimit2.iat[i,2]=interpolation([2015,2016],g,1)
+       SzkolySredniLimit2.iat[i,3]=interpolation([2015,2016],g,2)
+       SzkolySredniLimit2.iat[i,4]=error([2015,2016],g,1)
+       SzkolySredniLimit2.iat[i,5]=error([2015,2016],g,2)
+       
 PowiatyAngSredni['2018-liniowo']=np.zeros(20)
 PowiatyJPSredni['2018-liniowo']=np.zeros(20)
 PowiatyWOSSredni['2018-liniowo']=np.zeros(20)
@@ -82,6 +116,7 @@ PowiatyWOSSredni['Błąd-kwadratowo']=np.zeros(20)
 PowiatyMATSredni['Błąd-kwadratowo']=np.zeros(20)
 PowiatyPRZSredni['Błąd-kwadratowo']=np.zeros(20)
 
+e=np.zeros(4)
 a=[2014,2015,2016,2017]
 for k in Srednie:
     for i in range(0,20):        
