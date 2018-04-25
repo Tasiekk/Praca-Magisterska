@@ -57,6 +57,24 @@ ParametryWojPrz = pd.read_excel('Parametry WOJ-KRAJ\Parametry-WOJ-Przyrka.xlsx',
 ParametryKrajWOS = pd.read_excel('Parametry WOJ-KRAJ\Parametry-KRAJ-WOS.xlsx',index_col=0,header=0)
 ParametryWojWOS = pd.read_excel('Parametry WOJ-KRAJ\Parametry-WOJ-WOS.xlsx',index_col=0,header=0)
 
+Parametry = [ParametryKrajAng,ParametryWojAng,ParametryKrajMat,ParametryWojMat,ParametryKrajNiem,ParametryWojNiem,ParametryKrajPolski,ParametryWojPolski,ParametryKrajPrz,ParametryWojPrz,ParametryKrajWOS,ParametryWojWOS]
+for l in Parametry:
+    l.insert(len(l.columns),'2018-liniowo',np.zeros(len(l)))
+    l.insert(len(l.columns),'2018-kwadratowo',np.zeros(len(l)))
+    l.insert(len(l.columns),'Błąd-liniowo',np.zeros(len(l)))
+    l.insert(len(l.columns),'Błąd-kwadratowo',np.zeros(len(l)))
+    for i in range(0,len(l)):        
+        b=l[i:i+1]
+        g=np.zeros(5)
+        for j in range(0,5):
+            g[j]=b.iat[0,j] 
+        l.iat[i,5]=interpolation([2013,2014,2015,2016,2017],g,1)
+        l.iat[i,6]=interpolation([2013,2014,2015,2016,2017],g,2)
+        l.iat[i,7]=error([2013,2014,2015,2016,2017],g,1)
+        l.iat[i,8]=error([2013,2014,2015,2016,2017],g,2)
+
+
+
 SzkolySredniLimit3 = pd.read_excel('SZKOŁY\LICEA - Średni limit punktowy.xlsx',index_col=0,header=0,skip_footer=5)
 SzkolySredniLimit2 = pd.read_excel('SZKOŁY\LICEA - Średni limit punktowy.xlsx',index_col=0,header=0, skiprows=27, usecols=2)
 
@@ -69,10 +87,8 @@ SzkolySredniLimit2.insert(len(SzkolySredniLimit2.columns),'2018-liniowo',np.zero
 SzkolySredniLimit2.insert(len(SzkolySredniLimit2.columns),'2018-kwadratowo',np.zeros(len(SzkolySredniLimit2)))
 SzkolySredniLimit2.insert(len(SzkolySredniLimit2.columns),'Błąd-liniowo',np.zeros(len(SzkolySredniLimit2)))
 SzkolySredniLimit2.insert(len(SzkolySredniLimit2.columns),'Błąd-kwadratowo',np.zeros(len(SzkolySredniLimit2)))
-   
+
 f=np.zeros(3)
-
-
 for i in range(0,len(SzkolySredniLimit3)):        
        b=SzkolySredniLimit3[i:i+1]
        for j in range(0,3):
