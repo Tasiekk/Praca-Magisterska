@@ -21,5 +21,5 @@ def error(x,y,degree):
     error = np.zeros(len(x))
     for i in range(0,len(x)):
         error[i]=(p(x[i])-y[i])*(p(x[i])-y[i])
-    error = np.sqrt(np.sum(error))
+    error = np.sqrt(np.sum(error)/len(error))
     return error

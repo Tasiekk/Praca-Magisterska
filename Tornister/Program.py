@@ -173,7 +173,7 @@ else:
             print('- z języka angielskiego od',mgr.procentyMIN[3],'% do',mgr.procentyMAX[3],'%')
         else:
             print('- z języka niemieckiego od',mgr.procentyMIN[4],'% do',mgr.procentyMAX[4],'% ')
-        
+   
     wyroznienie=input('Czy uczeń ukończył szkołę z wyróźnieniem? ')
     while wyroznienie not in ['tak','Tak','nie','Nie','t','T','n','N']:
         wyroznienie=input('Czy uczeń ukończył szkołę z wyróźnieniem? ')
@@ -315,6 +315,7 @@ if wybor==1 or wybor==3:
         df4['2018'] = df4['2018'].map('{:.2f} pkt'.format)
         print()
         print('Poniżej pokazujemy tabelę szkół, do których powinien dostać się uczeń w roku 2018 wraz z szacowanym progiem punktowym dla danej szkoły.')
+        print()
         print('Szkoły: ')
         print(df4)
         
@@ -348,3 +349,54 @@ else:
     print()
     print('Szkoły: ')
     print(df4)
+porownanie=input('Czy chcesz zobaczyć porównanie wyników z przewidywanymi srednimi wynikami na rok 2018? ')
+while porownanie not in ['tak','Tak','nie','Nie','t','T','n','N']:
+    porownanie=input('Czy chcesz zobaczyć porównanie wyników z przewidywanymi srednimi wynikami na rok 2018? ')
+if porownanie in ['tak','Tak','t','T']:
+    print('Porównując wyniki ucznia z przewidywanymi srednimi wynikami w województwie pomorskim oraz kraju otrzymujemy, że: ')
+    if wybor == 1 or wybor == 3:
+        print('- uczeń zdobył',mgr.procenty[0],'punktów procentowych z języka polskiego podczas gdy srednia w województwie wynosi', mgr.ParametryWojPolski.iat[5,5],', a w kraju jest równa',mgr.ParametryKrajPolski.iat[5,5])
+        print('- uczeń zdobył',mgr.procenty[1],'punktów procentowych z matematyki podczas gdy srednia w województwie wynosi', mgr.ParametryWojMat.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajMat.iat[5,5])
+        print('- uczeń zdobył',mgr.procenty[2],'punktów procentowych z wiedzy o społeczeństwie podczas gdy srednia w województwie wynosi', mgr.ParametryWojWOS.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajWOS.iat[5,5])
+        print('- uczeń zdobył',mgr.procenty[3],'punktów procentowych z przedmiotów przyrodniczych podczas gdy srednia w województwie wynosi', mgr.ParametryWojPrz.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajPrz.iat[5,5])
+        if jezyk==1:
+            print('- uczeń zdobył',mgr.procenty[4],'punktów procentowych z języka obcego podczas gdy srednia w województwie wynosi', mgr.ParametryWojAng.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajAng.iat[5,5])
+        if jezyk==2:
+            print('- uczeń zdobył',mgr.procenty[4],'punktów procentowych z języka obcego podczas gdy srednia w województwie wynosi', mgr.ParametryWojNiem.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajNiem.iat[5,5])
+    else:
+        print('- punkty procentowe zdobyte przez ucznia z języka polskiego mogą się wahać pomiędzy',mgr.procentyMIN[0],'a',mgr.procentyMAX[0],'podczas gdy srednia w województwie wynosi', mgr.ParametryWojPolski.iat[5,5],', a w kraju jest równa',mgr.ParametryKrajPolski.iat[5,5])
+        print('- punkty procentowe zdobyte przez ucznia z matematyki mogą się wahać pomiędzy',mgr.procentyMIN[1],'a',mgr.procentyMAX[1],'podczas gdy srednia w województwie wynosi', mgr.ParametryWojMat.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajMat.iat[5,5])
+        print('- punkty procentowe zdobyte przez ucznia z wiedzy o społeczeństwie mogą się wahać pomiędzy',(mgr.procentyMIN[2]+mgr.procentyMIN[9])/2,'a',(mgr.procentyMAX[2]+mgr.procentyMAX[9])/2,'podczas gdy srednia w województwie wynosi', mgr.ParametryWojWOS.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajWOS.iat[5,5])
+        print('- punkty procentowe zdobyte przez ucznia z  przedmiotów przyrodniczych mogą się wahać pomiędzy',(mgr.procentyMIN[5]+mgr.procentyMIN[6]+mgr.procentyMIN[7]+mgr.procentyMIN[8])/4,'a',(mgr.procentyMAX[5]+mgr.procentyMAX[6]+mgr.procentyMAX[7]+mgr.procentyMAX[8])/4,'podczas gdy srednia w województwie wynosi', mgr.ParametryWojPrz.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajPrz.iat[5,5])
+        if jezyk==1:
+            print('- punkty procentowe zdobyte przez ucznia z języka polskiego mogą się wahać pomiędzy',mgr.procentyMIN[3],'a',mgr.procentyMAX[3],'podczas gdy srednia w województwie wynosi', mgr.ParametryWojAng.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajAng.iat[5,5])
+        if jezyk==2:
+            print('- punkty procentowe zdobyte przez ucznia z języka polskiego mogą się wahać pomiędzy',mgr.procentyMIN[4],'a',mgr.procentyMAX[4],'podczas gdy srednia w województwie wynosi', mgr.ParametryWojNiem.iat[5,5],'a w kraju jest równa',mgr.ParametryKrajNiem.iat[5,5])
+    porownanie1=input('Czy chcesz zobaczyć porównanie wyników z przewidywanymi wynikami dla twojego powiatu? ')
+    while porownanie1 not in ['tak','Tak','nie','Nie','t','T','n','N']:
+        porownanie1=input('Czy chcesz zobaczyć porównanie wyników z przewidywanymi wynikami dla twojego powiatu? ')  
+    if porownanie1 in ['tak','Tak','t','T']:
+        print('Wybierz swój powiat (miasto na prawach powiatu) z tej listy',*mgr.indexPowiaty, sep=', ')
+        powiat=input('Podaj powiat: ')
+        while powiat not in mgr.indexPowiaty:
+            powiat=input('Podaj powiat: ')
+        print('Porównując wyniki ucznia z przewidywanymi srednimi wynikami w powiecie (miescie na prawach powiatu) otrzymujemy, że: ')
+        if wybor == 1 or wybor == 3:
+            print('- uczeń zdobył',mgr.procenty[0],'punktów procentowych z języka polskiego podczas gdy srednia w powiecie wynosi','{0:.2f}'.format(float(mgr.PowiatyJPSredni['2018-kwadratowo'][mgr.PowiatyJPSredni.index==powiat])))
+            print('- uczeń zdobył',mgr.procenty[1],'punktów procentowych z matematyki podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyMATSredni['2018-kwadratowo'][mgr.PowiatyMATSredni.index==powiat])))
+            print('- uczeń zdobył',mgr.procenty[2],'punktów procentowych z wiedzy o społeczeństwie podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyWOSSredni['2018-kwadratowo'][mgr.PowiatyWOSSredni.index==powiat])))
+            print('- uczeń zdobył',mgr.procenty[3],'punktów procentowych z przedmiotów przyrodniczych podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyPRZSredni['2018-kwadratowo'][mgr.PowiatyPRZSredni.index==powiat])))
+            if jezyk==1:
+                print('- uczeń zdobył',mgr.procenty[4],'punktów procentowych z języka obcego podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyAngSredni['2018-kwadratowo'][mgr.PowiatyAngSredni.index==powiat])))
+            if jezyk==2:
+                print('- uczeń zdobył',mgr.procenty[4],'punktów procentowych z języka obcego podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyAngSredni['2018-kwadratowo'][mgr.PowiatyAngSredni.index==powiat])))
+        else:
+            print('- punkty procentowe zdobyte przez ucznia z języka polskiego mogą się wahać pomiędzy',mgr.procentyMIN[0],'a',mgr.procentyMAX[0],'podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyJPSredni['2018-kwadratowo'][mgr.PowiatyJPSredni.index==powiat])))
+            print('- punkty procentowe zdobyte przez ucznia z matematyki mogą się wahać pomiędzy',mgr.procentyMIN[1],'a',mgr.procentyMAX[1],'podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyMATSredni['2018-kwadratowo'][mgr.PowiatyMATSredni.index==powiat])))
+            print('- punkty procentowe zdobyte przez ucznia z wiedzy o społeczeństwie mogą się wahać pomiędzy',(mgr.procentyMIN[2]+mgr.procentyMIN[9])/2,'a',(mgr.procentyMAX[2]+mgr.procentyMAX[9])/2,'podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyWOSSredni['2018-kwadratowo'][mgr.PowiatyWOSSredni.index==powiat])))
+            print('- punkty procentowe zdobyte przez ucznia z  przedmiotów przyrodniczych mogą się wahać pomiędzy',(mgr.procentyMIN[5]+mgr.procentyMIN[6]+mgr.procentyMIN[7]+mgr.procentyMIN[8])/4,'a',(mgr.procentyMAX[5]+mgr.procentyMAX[6]+mgr.procentyMAX[7]+mgr.procentyMAX[8])/4,'podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyPRZSredni['2018-kwadratowo'][mgr.PowiatyPRZSredni.index==powiat])))
+            if jezyk==1:
+                print('- punkty procentowe zdobyte przez ucznia z języka polskiego mogą się wahać pomiędzy',mgr.procentyMIN[3],'a',mgr.procentyMAX[3],'podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyAngSredni['2018-kwadratowo'][mgr.PowiatyAngSredni.index==powiat])))
+            if jezyk==2:
+                print('- punkty procentowe zdobyte przez ucznia z języka polskiego mogą się wahać pomiędzy',mgr.procentyMIN[4],'a',mgr.procentyMAX[4],'podczas gdy srednia w powiecie wynosi', '{0:.2f}'.format(float(mgr.PowiatyAngSredni['2018-kwadratowo'][mgr.PowiatyAngSredni.index==powiat])))
+print('\n Dziękujemy za skorzystanie z naszego programu!')
