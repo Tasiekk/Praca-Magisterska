@@ -1,0 +1,21 @@
+Powiat/Miasto_na_prawach_powiatu 2014 2015 2016 2017
+bytowski 
+chojnicki 
+cz³uchowski 
+gdañski 
+kartuski 
+koœcierski 
+kwidzyñski 
+lêborski 
+Gdañsk 
+Gdynia 
+S³upsk 
+Sopot 
+malborski 
+nowodworski 
+pucki 
+s³upski 
+starogardzki 
+sztumski 
+tczewski 
+wejherowski 
